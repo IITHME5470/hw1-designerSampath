@@ -4,27 +4,35 @@
 
 int check_vector(int k, int n, double* result, double* vector){
 	int i;
-	double tol = 1e-300;
+	double tol = 1.0e-6;
 	double lambda;
 	double factor = 0;
+	double pre_factor;
 	for(i = 0; i < n; i++){
+
 		if(fabs(vector[i]) < tol){
 			if(fabs(result[i]) > tol){
 				printf("vec-%06d-%06d:Not an eigen vector\n", n, k);
 				return 1;
 			}
-			continue;
+			else{
+				continue;
+			}
+			
+		}
+		else{
+			pre_factor = result[i]/vector[i];
 		}
 
-		double pre_factor = result[i]/vector[i];
        		if(!factor){
 			lambda = pre_factor;
 			factor = 1;
 		}
-		if(fabs(pre_factor - lambda) > tol){
+		else if(fabs(pre_factor - lambda) > tol){
 			printf("vec-%06d-%06d:Not an eigen vector\n", n, k);
 			return 0;
 		}
+		
 	}
 	if(factor){
 		printf("Yes:%.2f \n", lambda);
@@ -112,11 +120,13 @@ int main(){
 		double result[n];
 
 		for (i = 0;i < n ; i ++){
+			result[i] = 0;
 			for(j = 0; j < n; j++){
 				result[i] += matrix[i][j] * vec[j];
 			}
 		}
 		check_vector(k, n, result, vec);
 		free(vec);
-	}	
+	}
+	
 }

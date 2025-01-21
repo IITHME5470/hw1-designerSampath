@@ -66,22 +66,9 @@ int main(){
         }
      	fclose(input_file);
 	
-	//Single block of code for an array of size n * m
-	//int* matrix = (int*) malloc(n * m * sizeof(int));
-        //int i;
-        //int row = 1;
-        //for(i = 0; i < n*m; i++){
-        //        int quo = (i + 1)/m;
-        //        int rem = (i + 1)%m;
-        //        if( rem == 0){
-        //                *(matrix + i) = m + quo;
-        //        }
-        //        else{
-        //                *(matrix + i) = quo + rem + 1;
-        //        }
-       // 
-       //}
-       printf("%d \n", n);
+	// it can also be implemented using single block of code
+	
+       	printf("%d \n", n);
 	double** ptr = (double**) malloc(n * sizeof(double*)); // dynamicaaly allocatng space for the pointers 
 	if(ptr == NULL){
 		printf("memory allocation is not successfull \n");
